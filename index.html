@@ -162,7 +162,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">标签</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Games/" rel="tag">Games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/PS3/" rel="tag">PS3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li></ul>
     </div>
   </div>
 
@@ -176,7 +176,7 @@
       
         <a class="archive-link" href="/archives/2023/11 ">
           十一月 2023 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
     </div>
@@ -189,6 +189,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2023/11/23/daily-note/" title="daily-note" >
+            <div class="recent-link-text">
+              daily-note
+            </div>
+          </a>
         
           <a class="recent-link" href="/2023/11/10/hello-world/" title="Hello World" >
             <div class="recent-link-text">
@@ -206,6 +212,88 @@
     </div>
     <div id="content-body">
       
+   
+
+<article id="post-daily-note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/11/23/daily-note/">daily-note</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-11-23T02:14:49.000Z" itemprop="datePublished">2023-11-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+  <a class="meta-cate-link" href="/categories/Diary/">Diary</a>
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            552 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Games/" rel="tag">Games</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PS3/" rel="tag">PS3</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            2023-11-22
+WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+
+解决：ssh-keygen -R XXX（目标主机的ip地址）
+
+
+&gt;&gt; 并不具备高优先级：64 - 64 &gt;&gt; 2 &#x3D; 0
+
+readdir() 单次最多只能处理 1024 or 1025 个 entry，所以需要考虑第二次调用的时候怎么从上次的位置继续往下遍历
+
+
+2023-11-23
+readdir() 的参数之一：struct dir_context *ctx
+123456789101112// linux-4.15struct dir_context &#123;	const filldir_t actor;	loff_t pos;&#125;;// FlatFSstruct dir_context &#123;	const filldir_t actor;	loff_t pos;	fastr_t pos_key;&#125;;
+
+
+其他文件系统使用 pos 参数来跟踪 entry 的位置（如 NOVA），但是 Fl...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/11/23/daily-note/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
    
 
 <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
@@ -232,7 +320,7 @@
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
   
-  <a class="meta-cate-link" href="/categories/Test/">Test</a>
+    未分类 
    
 </div>
   
@@ -242,8 +330,6 @@
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li></ul>
-
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
