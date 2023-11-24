@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showBanner="true" hasBanner="true" > 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js" ></script>
+<script src="/js/load-settings.js" ></script>
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+
+  
+  <title>The Go Programming Language | Orange</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+
+  <meta name="description" content="1. 入门1.1 hello, world1234567package main  &#x2F;&#x2F; 1import &quot;fmt&quot;func main() &#123;    fmt.Println(&quot;Hello, 世界&quot;) &#x2F;&#x2F; 2, 3&#125;   Go 中的包类似于其他编程语言中的库，由一个或多个 .go 源文件构成，其中 main 包用于定义一个独立的可执行程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Go Programming Language">
+<meta property="og:url" content="http://example.com/2023/11/24/gopl/index.html">
+<meta property="og:site_name" content="Orange">
+<meta property="og:description" content="1. 入门1.1 hello, world1234567package main  &#x2F;&#x2F; 1import &quot;fmt&quot;func main() &#123;    fmt.Println(&quot;Hello, 世界&quot;) &#x2F;&#x2F; 2, 3&#125;   Go 中的包类似于其他编程语言中的库，由一个或多个 .go 源文件构成，其中 main 包用于定义一个独立的可执行程序">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-11-24T09:04:09.000Z">
+<meta property="article:modified_time" content="2023-11-24T09:16:11.905Z">
+<meta property="article:author" content="Yu">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="Study Notes">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Orange" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class="">
+  <img src="/assets/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class=""  >
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>Orange </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="light-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M438.5-829.913v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-829.913Zm0 747.826v-48q0-17.452 11.963-29.476 11.964-12.024 29.326-12.024 17.363 0 29.537 12.024t12.174 29.476v48q0 17.452-11.963 29.476-11.964 12.024-29.326 12.024-17.363 0-29.537-12.024T438.5-82.087ZM877.913-438.5h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537t29.476-12.174h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T877.913-438.5Zm-747.826 0h-48q-17.452 0-29.476-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T82.087-521.5h48q17.452 0 29.476 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T130.087-438.5Zm660.174-290.87-34.239 32q-12.913 12.674-29.565 12.174-16.653-.5-29.327-13.174-12.674-12.673-12.554-28.826.12-16.152 12.794-28.826l33-35q12.913-12.674 30.454-12.674t30.163 12.847q12.709 12.846 12.328 30.826-.38 17.98-13.054 30.653ZM262.63-203.978l-32 34q-12.913 12.674-30.454 12.674t-30.163-12.847q-12.709-12.846-12.328-30.826.38-17.98 13.054-30.653l33.239-31q12.913-12.674 29.565-12.174 16.653.5 29.327 13.174 12.674 12.673 12.554 28.826-.12 16.152-12.794 28.826Zm466.74 33.239-32-33.239q-12.674-12.913-12.174-29.565.5-16.653 13.174-29.327 12.673-12.674 28.826-13.054 16.152-.38 28.826 12.294l35 33q12.674 12.913 12.674 30.454t-12.847 30.163q-12.846 12.709-30.826 12.328-17.98-.38-30.653-13.054ZM203.978-697.37l-34-33q-12.674-12.913-13.174-29.945-.5-17.033 12.174-29.707t31.326-13.293q18.653-.62 31.326 13.054l32 34.239q11.674 12.913 11.174 29.565-.5 16.653-13.174 29.327-12.673 12.674-28.826 12.554-16.152-.12-28.826-12.794ZM480-240q-100 0-170-70t-70-170q0-100 70-170t170-70q100 0 170 70t70 170q0 100-70 170t-170 70Zm-.247-82q65.703 0 111.475-46.272Q637-414.544 637-480.247t-45.525-111.228Q545.95-637 480.247-637t-111.475 45.525Q323-545.95 323-480.247t45.525 111.975Q414.05-322 479.753-322ZM481-481Z"/></svg></span>
+      <span class="dark-mode-icon"><svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M480.239-116.413q-152.63 0-258.228-105.478Q116.413-327.37 116.413-480q0-130.935 77.739-227.435t206.304-125.043q43.022-9.631 63.87 10.869t3.478 62.805q-8.891 22.043-14.315 44.463-5.424 22.42-5.424 46.689 0 91.694 64.326 155.879 64.325 64.186 156.218 64.186 24.369 0 46.978-4.946 22.609-4.945 44.413-14.076 42.826-17.369 62.967 1.142 20.142 18.511 10.511 61.054Q807.174-280 712.63-198.206q-94.543 81.793-232.391 81.793Zm0-95q79.783 0 143.337-40.217 63.554-40.218 95.793-108.283-15.608 4.044-31.097 5.326-15.49 1.283-31.859.805-123.706-4.066-210.777-90.539-87.071-86.473-91.614-212.092-.24-16.369.923-31.978 1.164-15.609 5.446-30.978-67.826 32.478-108.282 96.152Q211.652-559.543 211.652-480q0 111.929 78.329 190.258 78.329 78.329 190.258 78.329ZM466.13-465.891Z"/></svg></span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS 订阅">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M198-120q-25.846 0-44.23-18.384-18.384-18.385-18.384-44.23 0-25.846 18.384-44.23 18.384-18.385 44.23-18.385 25.846 0 44.23 18.385 18.384 18.384 18.384 44.23 0 25.845-18.384 44.23Q223.846-120 198-120Zm538.385 0q-18.846 0-32.923-13.769-14.076-13.769-15.922-33.23-8.692-100.616-51.077-188.654-42.385-88.039-109.885-155.539-67.5-67.501-155.539-109.885Q283-663.462 182.385-672.154q-19.461-1.846-33.23-16.23-13.769-14.385-13.769-33.846t14.076-32.922q14.077-13.461 32.923-12.23 120.076 8.692 226.038 58.768 105.961 50.077 185.73 129.846 79.769 79.769 129.846 185.731 50.077 105.961 58.769 226.038 1.231 18.846-12.538 32.922Q756.461-120 736.385-120Zm-252 0q-18.231 0-32.423-13.461t-18.653-33.538Q418.155-264.23 348.886-333.5q-69.27-69.27-166.501-84.423-20.077-4.462-33.538-18.961-13.461-14.5-13.461-33.346 0-19.076 13.884-33.23 13.884-14.153 33.115-10.922 136.769 15.384 234.384 112.999 97.615 97.615 112.999 234.384 3.231 19.23-10.538 33.115Q505.461-120 484.385-120Z"/></svg>
+      </a>
+    
+    <div id="nav-menu-btn" class="nav-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20"><path d="M177.37-252.282q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Zm0-186.218q-17.453 0-29.477-11.963-12.024-11.964-12.024-29.326 0-17.363 12.024-29.537T177.37-521.5h605.26q17.453 0 29.477 11.963 12.024 11.964 12.024 29.326 0 17.363-12.024 29.537T782.63-438.5H177.37Zm0-186.217q-17.453 0-29.477-11.964-12.024-11.963-12.024-29.326t12.024-29.537q12.024-12.174 29.477-12.174h605.26q17.453 0 29.477 11.964 12.024 11.963 12.024 29.326t-12.024 29.537q-12.024 12.174-29.477 12.174H177.37Z"/></svg>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS 订阅">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src=/assets/favicon.jpg></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">Orange </div>
+      <div class="dot"></div>
+      <div class="subtitle">This is the subtitle </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/Luckyoranges" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+
+
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">分类</h3>
+      <div class="category-box"></div>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">标签</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Study-Notes/" rel="tag">Study Notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/research/" rel="tag">research</a></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2023/11 ">
+          十一月 2023 
+          <div class="archive-count">3 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2023/11/24/gopl/" title="The Go Programming Language" >
+            <div class="recent-link-text">
+              The Go Programming Language
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/11/23/daily-note/" title="Daily Log" >
+            <div class="recent-link-text">
+              Daily Log
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/11/10/hello-world/" title="Hello World" >
+            <div class="recent-link-text">
+              Hello World
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-gopl" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        The Go Programming Language
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-11-24T09:04:09.000Z" itemprop="datePublished">2023-11-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-Notes/" rel="tag">Study Notes</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="1-入门"><a href="#1-入门" class="headerlink" title="1. 入门"></a>1. 入门</h2><h3 id="1-1-hello-world"><a href="#1-1-hello-world" class="headerlink" title="1.1 hello, world"></a>1.1 hello, world</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;fmt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Hello, 世界&quot;</span>) <span class="comment">// 2, 3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>Go 中的包类似于其他编程语言中的库，由一个或多个 .go 源文件构成，其中 <em>main</em> 包用于定义一个独立的可执行程序而不是库</p>
+</li>
+<li><p>Go 原生支持 Unicode：使用 4 byte 的 int 类型（rune）存放 Unicode</p>
+</li>
+<li><p>在编译的时候，特定符号后面的换行符会被转换为分号</p>
+</li>
+</ol>
+<hr>
+<h3 id="1-2-命令行参数"><a href="#1-2-命令行参数" class="headerlink" title="1.2 命令行参数"></a>1.2 命令行参数</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// echo1 输出命令行参数 // 1</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;fmt&quot;</span></span><br><span class="line">    <span class="string">&quot;os&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> s, sep <span class="type">string</span> <span class="comment">// 2, 3</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(os.Args[<span class="number">1</span>:]); i++ &#123; <span class="comment">// 4, 5, 6</span></span><br><span class="line">        s += sep + os.Args[i] <span class="comment">// 7</span></span><br><span class="line">        sep = <span class="string">&quot; &quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(s)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>习惯上，在 <code>import &lt;package name&gt;</code> 之前添加注释，对包进行解释</p>
+<ul>
+<li>声明函数之前同理，而且可以被 <code>go doc</code> 和 <code>godoc</code> 工具定位并作为文档显示</li>
+</ul>
+</li>
+<li><p>显式声明：<code>var s string</code>（强调）</p>
+</li>
+<li><p>变量定义了之后一定要使用</p>
+</li>
+<li><p>短变量声明：<code>s := &quot;&quot;</code>（不在包级别的变量中使用）</p>
+</li>
+<li><p><code>i++</code> 和 <code>i--</code> 是语句而不是表达式</p>
+</li>
+<li><p>for 后面如果只跟一部分的话，则这一部分代表 <em>condition</em>（for <em>condition</em> &#x3D;&#x3D; while <em>condition</em>）</p>
+</li>
+<li><p>每一个运算 &#x2F; 逻辑操作符（+）都对应一个赋值操作符（+&#x3D;）</p>
+</li>
+</ol>
+<hr>
+<h3 id="1-3-找出重复行"><a href="#1-3-找出重复行" class="headerlink" title="1.3 找出重复行"></a>1.3 找出重复行</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    counts := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>) <span class="comment">// 1</span></span><br><span class="line">    input := bufio.NewScanner(os.Stdin) <span class="comment">// 2</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> input.Scan() &#123; <span class="comment">// 3</span></span><br><span class="line">        counts[input.Text()]++ <span class="comment">// 4</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> line, n := <span class="keyword">range</span> counts &#123;</span><br><span class="line">        <span class="keyword">if</span> n &gt; <span class="number">1</span> &#123;</span><br><span class="line">            fmt.Printf(<span class="string">&quot;%d\t%s\n&quot;</span>, n, line) <span class="comment">// 5</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>map</p>
+<ul>
+<li><p>map 在执行 store, get, test 时的开销为常数时间</p>
+</li>
+<li><p>map 的 key 是能够使用 <code>==</code> 进行比较的任意类型（所以一些复杂类型不能用作 key ?）</p>
+</li>
+<li><p>对 map 的 key 进行迭代时，顺序是随机的</p>
+</li>
+</ul>
+</li>
+<li><p>bufio.Scanner 类型：能够以行 or 单词为单位划分输入</p>
+</li>
+<li><p>.Scan() 每次读取一行输入，并删除末尾的换行符，当读取结束时返回 false</p>
+</li>
+<li><p>.Text() 用于获取读取的文本</p>
+</li>
+<li><p>fmt 中以 ln 结尾的函数使用 %v 来格式化参数（%v：该类型的默认格式）</p>
+</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    counts := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>)</span><br><span class="line">    files := os.Args[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">for</span> _, arg := <span class="keyword">range</span> files &#123;</span><br><span class="line">        f, err := os.Open(arg)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123; <span class="comment">// 1</span></span><br><span class="line">            os.Fprintf(os.Stderr, <span class="string">&quot;dup2: %v\n&quot;</span>, err)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        countLines(f, counts)</span><br><span class="line">        f.<span class="built_in">close</span>() <span class="comment">// 2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">countLines(f *os.File, counts <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">int</span>) &#123; <span class="comment">// 3</span></span><br><span class="line">    input := bufio.NewScanner(f)</span><br><span class="line">    <span class="keyword">for</span> input.Scan() &#123;</span><br><span class="line">        counts[input.Text()]++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>一种简单的错误处理方式</li>
+<li>避免资源泄露</li>
+<li>函数的声明可以在调用之后</li>
+</ol>
+<hr>
+<h3 id="1-4-GIF-动画"><a href="#1-4-GIF-动画" class="headerlink" title="1.4 GIF 动画"></a>1.4 GIF 动画</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">&quot;image&quot;</span></span><br><span class="line">    <span class="string">&quot;image/color&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> palatte = []color.Color&#123;color.White, color.Black&#125; <span class="comment">// 1</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	whiteIndex = <span class="number">0</span></span><br><span class="line">    blackIndex = <span class="number">1</span></span><br><span class="line">) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>导入由多段路径组成的包时，使用路径的最后一段来引用这个包</li>
+<li>常量<ul>
+<li>常量只能是布尔值、字符串、数值</li>
+<li>常量允许定义了以后不使用</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="1-5-获取一个-URL"><a href="#1-5-获取一个-URL" class="headerlink" title="1.5 获取一个 URL"></a>1.5 获取一个 URL</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">for</span> _, url := <span class="keyword">range</span> os.Args[<span class="number">1</span>:] &#123;</span><br><span class="line">		resp, err := http.Get(url)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Fprintf(os.Stderr, <span class="string">&quot;fetch: %v\n&quot;</span>, err)</span><br><span class="line">			os.Exit(<span class="number">1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		b, err := ioutil.ReadAll(resp.Body)</span><br><span class="line">        resp.Body.Close()</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Fprintf(os.Stderr, <span class="string">&quot;fetch: reading %s: %v\n&quot;</span>, url, err)</span><br><span class="line">            os.Exit(<span class="number">0</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;%s&quot;</span>, b)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="1-6-并发获取多个-URL"><a href="#1-6-并发获取多个-URL" class="headerlink" title="1.6 并发获取多个 URL"></a>1.6 并发获取多个 URL</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	start := time.Now()</span><br><span class="line">	ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="type">string</span>) <span class="comment">// 1</span></span><br><span class="line">	<span class="keyword">for</span> _, url := <span class="keyword">range</span> os.Args[<span class="number">1</span>:] &#123;</span><br><span class="line">		<span class="keyword">go</span> fetch(url, ch)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> <span class="keyword">range</span> os.Args[<span class="number">1</span>:] &#123;</span><br><span class="line">		fmt.Println(&lt;-ch)</span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Printf(<span class="string">&quot;%.2fs elapsed\n&quot;</span>, time.Since(start).Seconds())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fetch</span><span class="params">(url <span class="type">string</span>, ch <span class="keyword">chan</span>&lt;- <span class="type">string</span>)</span></span> &#123;</span><br><span class="line">	start := time.Now()</span><br><span class="line">	resp, err := http.Get(url)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		ch &lt;- fmt.Sprint(err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	nbytes, err := io.Copy(io.Discard, resp.Body)</span><br><span class="line">	resp.Body.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		ch &lt;- fmt.Sprint(<span class="string">&quot;while reading %s: %v&quot;</span>, url, err)</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	secs := time.Since(start).Seconds()</span><br><span class="line">	ch &lt;- fmt.Sprintf(<span class="string">&quot;%.2fs  %7d  %s&quot;</span>, secs, nbytes, url) <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>通道允许某一  goroutine 向另外一个传递消息，main 函数在一个 goruntine 中进行</p>
+</li>
+<li><p>当一个 goroutine 试图在通道上进行信息的发送或接收时，其会被阻塞；只有另一个 goroutine 开始进行接受或发送时，值的传递才会发生</p>
+</li>
+</ol>
+<hr>
+<h3 id="1-7-一个-Web-服务器"><a href="#1-7-一个-Web-服务器" class="headerlink" title="1.7 一个 Web 服务器"></a>1.7 一个 Web 服务器</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">&quot;/&quot;</span>, handler) <span class="comment">// 1， 2</span></span><br><span class="line">    log.Fatal(http.ListenAndServe(<span class="string">&quot;localhost:8080&quot;</span>, <span class="literal">nil</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handler</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    fmt.Fprintf(w, <span class="string">&quot;URL.Path = %s\n&quot;</span>, r.URL.Path)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>以 &#x2F; 结尾的处理模式会匹配所有含该前缀的 URL</li>
+<li>匹配的 URL 都交付于 handler 函数进行处理</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> err := r.ParseForm(); err != <span class="literal">nil</span> &#123; <span class="comment">// 1</span></span><br><span class="line">    log.Print(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Go 允许一条简单的语句写在 <em>condition</em> 的前面（在这里可以缩小 err 的作用域）</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http.HandleFunc(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(w http.ResponseWrite, r *http.Requesr)</span></span>&#123;</span><br><span class="line">    lissajous(w)</span><br><span class="line">&#125;) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>匿名函数</li>
+</ol>
+<hr>
+<h3 id="1-8-其他内容"><a href="#1-8-其他内容" class="headerlink" title="1.8 其他内容"></a>1.8 其他内容</h3><ul>
+<li><p>控制流</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Signum</span><span class="params">(x <span class="type">int</span>)</span></span> <span class="type">int</span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> &#123;</span><br><span class="line">	<span class="keyword">case</span> x &gt; <span class="number">0</span>: <span class="comment">// 1</span></span><br><span class="line">		<span class="keyword">return</span> +<span class="number">1</span></span><br><span class="line">	<span class="keyword">default</span>: <span class="comment">// 2</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">case</span> err := <span class="number">0</span>; x &lt; <span class="number">0</span>: <span class="comment">// 3</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>从上到下第一个匹配的 case 语句被执行</p>
+</li>
+<li><p>default 可以不是最后一个语句</p>
+</li>
+<li><p>与 for 和 if 类似，在 <em>condition</em> 前面可以加一个简单语句</p>
+</li>
+</ol>
+</li>
+<li><p>命名类型</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Point <span class="keyword">struct</span> &#123;</span><br><span class="line">    X, Y <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> p Point</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法和接口：一个关联了类型的函数被称作方法</p>
+</li>
+</ul>
+<h2 id="2-程序结构"><a href="#2-程序结构" class="headerlink" title="2. 程序结构"></a>2. 程序结构</h2><h3 id="2-1-名称"><a href="#2-1-名称" class="headerlink" title="2.1 名称"></a>2.1 名称</h3><ul>
+<li>如果一个声明位于函数外，那么它在整个包内都可见</li>
+<li>用命名第一个字母的大小写区分是否对包外可见（大写 → 导出）</li>
+<li>包名通常用小写字母</li>
+<li>命名使用“驼峰式”风格</li>
+<li>ASCII 和 HTML 要么全部大写，要么全部小写：htmlProxy or HTMLProxy</li>
+</ul>
+<hr>
+<h3 id="2-2-声明"><a href="#2-2-声明" class="headerlink" title="2.2 声明"></a>2.2 声明</h3><ul>
+<li>声明包括：变量、常量、类型、函数</li>
+</ul>
+<hr>
+<h3 id="2-3-变量声明"><a href="#2-3-变量声明" class="headerlink" title="2.3 变量声明"></a>2.3 变量声明</h3><ul>
+<li>接口和引用类型（slice，指针，map，通道，函数）的零值为 nil</li>
+<li>数组和结构体的零值是所有成员的零值</li>
+</ul>
+<h4 id="2-3-1-短变量声明"><a href="#2-3-1-短变量声明" class="headerlink" title="2.3.1 短变量声明"></a>2.3.1 短变量声明</h4><ul>
+<li><p>var 声明通常用于之后才进行赋值或初值不重要的变量</p>
+</li>
+<li><p>通常只在类似于 for 循环初始化的场景中才使用对多个变量进行短变量命名的方式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">i, j := <span class="number">0</span>, <span class="number">1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>短变量命名也可以用于部分赋值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">in, err := os.Open(infile)</span><br><span class="line">out, err := os.Open(outfile) <span class="comment">// 声明了 out，但是仅对 err 进行赋值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>短变量声明至少要声明一个新变量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">f, err := os.Open(infile)</span><br><span class="line">f, err := os.Open(outfile) <span class="comment">// f 和 err 都已经被声明过了</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left  disabled "
+     >
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right "
+    
+      href="/2023/11/23/daily-note/"
+      title="Daily Log"
+     >
+
+    <p class="title-text">
+      
+        Daily Log
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+
+  
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <div id="comment-card" class="comment-card">
+    <div class="main-title-bar">
+      <div class="main-title-dot"></div>
+      <div class="main-title">留言 </div>
+    </div>
+    <div id="vcomments"></div>
+  </div>
+  <script>
+      new Valine({"enable":true,"appId":"eP2qQLI5OLMpdbSpc77ECdsf-MdYXbMMI","appKey":"Zu0XDhWVCU3CAtTVqml2NFPl","placeholder":"Just go go","pageSize":10,"highlight":true,"serverURLs":"https://ep2qqli5.api.lncldglobal.com","el":"#vcomments"});
+  </script>
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2023 Orange<br>
+    Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

@@ -162,7 +162,7 @@
   <div class="widget-wrap">
     <div class="widget">
       <h3 class="widget-title">标签</h3>
-      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Games/" rel="tag">Games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/PS3/" rel="tag">PS3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li></ul>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Study-Notes/" rel="tag">Study Notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/Test/" rel="tag">Test</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/research/" rel="tag">research</a></li></ul>
     </div>
   </div>
 
@@ -176,7 +176,7 @@
       
         <a class="archive-link" href="/archives/2023/11 ">
           十一月 2023 
-          <div class="archive-count">2 </div>
+          <div class="archive-count">3 </div>
         </a>
       
     </div>
@@ -190,9 +190,15 @@
       <h3 class="widget-title">最新文章</h3>
       <ul>
         
-          <a class="recent-link" href="/2023/11/23/daily-note/" title="daily-note" >
+          <a class="recent-link" href="/2023/11/24/gopl/" title="The Go Programming Language" >
             <div class="recent-link-text">
-              daily-note
+              The Go Programming Language
+            </div>
+          </a>
+        
+          <a class="recent-link" href="/2023/11/23/daily-note/" title="Daily Log" >
+            <div class="recent-link-text">
+              Daily Log
             </div>
           </a>
         
@@ -214,6 +220,83 @@
       
    
 
+<article id="post-gopl" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2023/11/24/gopl/">The Go Programming Language</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-11-24T09:04:09.000Z" itemprop="datePublished">2023-11-24</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.3k 词 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go/" rel="tag">Go</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Study-Notes/" rel="tag">Study Notes</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            1. 入门1.1 hello, world1234567package main  // 1import &quot;fmt&quot;func main() &#123;    fmt.Println(&quot;Hello, 世界&quot;) // 2, 3&#125;
+
+
+Go 中的包类似于其他编程语言中的库，由一个或多个 .go 源文件构成，其中 main 包用于定义一个独立的可执行程序而不是库
+
+Go 原生支持 Unicode：使用 4 byte 的 int 类型（rune）存放 Unicode
+
+在编译的时候，特定符号后面的换行符会被转换为分号
+
+
+
+1.2 命令行参数12345678910111213141516// echo1 输出命令行参数 // 1package mainimport (	&quot;fmt&quot;    &quot;os&quot;)func main() &#123;    var s, sep string // 2, 3    for i := 0; i &lt; len(os.Args[1:]); i++ &#123; // 4...  
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2023/11/24/gopl/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+ 
+
+   
+
 <article id="post-daily-note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
@@ -225,7 +308,7 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2023/11/23/daily-note/">daily-note</a>
+        <a class="p-name article-title" href="/2023/11/23/daily-note/">Daily Log</a>
       </h1>
     
   
@@ -244,11 +327,11 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            552 词 
+            1.9k 词 
           </div>
         </div>
         
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Games/" rel="tag">Games</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PS3/" rel="tag">PS3</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/research/" rel="tag">research</a></li></ul>
 
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
